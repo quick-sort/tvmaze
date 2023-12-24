@@ -1,0 +1,1 @@
+10 0 * * * root /app/scripts/cronjob.sh >> /var/log/cron.log 2>&1

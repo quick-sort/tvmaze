@@ -1,0 +1,700 @@
+{
+	"info": {
+		"_postman_id": "e02a0231-b23b-4c7b-9d68-c8cf213a7540",
+		"name": "TVMAZE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1300174"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "registry",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"registry ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"full_name\": \"fullname\",\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base}}/users/registry",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"users",
+								"registry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"login ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{email}}\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base}}/users/login",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"user info ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/users/self",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"users",
+								"self"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/users/logout",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "jobs",
+			"item": [
+				{
+					"name": "joblist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get joblist ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data).length.gt(0);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/jobs",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create job",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"create job ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.id).exist;",
+									"    pm.environment.set('job_id', data.id);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"date\": \"2023-10-11\",\n    \"country\": \"US\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_base}}/jobs",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "job info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get job ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.id).exist;",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/jobs/{{job_id}}",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"jobs",
+								"{{job_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "restart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"restart job ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.id).exist;",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/jobs/{{job_id}}/restart",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"jobs",
+								"{{job_id}}",
+								"restart"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{api_key}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "api-key",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "episodes",
+			"item": [
+				{
+					"name": "episode list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get episodes ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data).length.gt(0);",
+									"    pm.environment.set('episode_id', data[0].id);",
+									"    pm.environment.set('search_name', data[0].name);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/episodes?offset=0&limit=10&order=desc&orderby=name",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"episodes"
+							],
+							"query": [
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								},
+								{
+									"key": "orderby",
+									"value": "name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "episode list search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get episodes ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.length).ge(1);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/episodes?search_field=name&search_value={{search_name}}",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"episodes"
+							],
+							"query": [
+								{
+									"key": "search_field",
+									"value": "name"
+								},
+								{
+									"key": "search_value",
+									"value": "{{search_name}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "like episode",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/episodes/{{episode_id}}/do?action=like",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"episodes",
+								"{{episode_id}}",
+								"do"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "like"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bookmark episode",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/episodes/{{episode_id}}/do?action=bookmark",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"episodes",
+								"{{episode_id}}",
+								"do"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "bookmark"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "episode info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get episodes ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.id).exist;",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/episodes/{{episode_id}}",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"episodes",
+								"{{episode_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "episode guest cast info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get episodes ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.id).exist;",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/episodes/{{episode_id}}/guestcast",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"episodes",
+								"{{episode_id}}",
+								"guestcast"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "episode like list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get episodes ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data).length.gt(0);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/episodes/likes",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"episodes",
+								"likes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "episode bookmark list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get episodes ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.length).gt(0);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/episodes/bookmarks",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"episodes",
+								"bookmarks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bookmark episodes search cast person",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"get episodes ok\", function() {",
+									"    pm.response.to.have.status(200);",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.length).eq(0);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/episodes/bookmarks?person=name&character=name",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"episodes",
+								"bookmarks"
+							],
+							"query": [
+								{
+									"key": "person",
+									"value": "name"
+								},
+								{
+									"key": "character",
+									"value": "name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unlike episode",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/episodes/{{episode_id}}/do?action=unlike",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"episodes",
+								"{{episode_id}}",
+								"do"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "unlike"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unbookmark episode",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{api_base}}/episodes/{{episode_id}}/do?action=unbookmark",
+							"host": [
+								"{{api_base}}"
+							],
+							"path": [
+								"episodes",
+								"{{episode_id}}",
+								"do"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "unbookmark"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
